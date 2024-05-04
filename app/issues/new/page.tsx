@@ -26,8 +26,12 @@ export default function NewIssuePage() {
       <form
       className='space-y-3'
       onSubmit={handleSubmit(async (data) => {
-        await axios.post('/api/issues', data);
-        router.push('/issues');
+        try {
+          await axios.post('/api/issues', data);
+          router.push('/issues');
+        } catch (error) {
+          setError('An unexpexted error occurred. Please try again.');
+        } 
       })}
       >
           <TextField.Root placeholder='Title' {...register('title')}>  
